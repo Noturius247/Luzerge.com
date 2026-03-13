@@ -153,7 +153,7 @@ jobs:
 
       - name: Test API health endpoint
         run: |
-          RESPONSE=$(curl -s https://luzerge.com/api/ping)
+          RESPONSE=$(curl -s https://byzuraeyhrxxpztredri.supabase.co/functions/v1/api/ping)
           echo "API response: $RESPONSE"
           echo $RESPONSE | python3 -c "
           import sys,json
