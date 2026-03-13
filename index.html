@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Luzerge — Fast Websites for Cebu Businesses</title>
+  <meta name="description" content="Professional CDN-powered websites for Cebu SMEs. Sub-200ms load times, free SSL, and automatic deployments. Starter plans from ₱2,500/mo." />
+  <meta name="keywords" content="web design Cebu, website Cebu Philippines, CDN hosting Philippines, Cebu web developer" />
+  <link rel="canonical" href="https://luzerge.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luzerge.com/" />
+  <meta property="og:title" content="Luzerge — Fast Websites for Cebu Businesses" />
+  <meta property="og:description" content="Get a professional, CDN-powered website for your Cebu business. Free SSL, DDoS protection, and 24/7 uptime." />
+  <meta property="og:image" content="https://luzerge.com/img/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Luzerge — Fast Websites for Cebu Businesses" />
+  <meta name="twitter:description" content="Professional CDN-powered websites for Cebu SMEs from ₱2,500/mo." />
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Luzerge",
+    "url": "https://luzerge.com",
+    "email": "hello@luzerge.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cebu City",
+      "addressRegion": "Cebu",
+      "addressCountry": "PH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 10.3157,
+      "longitude": 123.8854
+    },
+    "priceRange": "₱₱",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "serviceArea": {
+      "@type": "Place",
+      "name": "Cebu, Philippines"
+    }
+  }
+  </script>
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/css/styles.css" as="style" />
+  <link rel="preload" href="/js/app.js" as="script" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <!-- Cloudflare Web Analytics (privacy-friendly) -->
+  <!-- Replace TOKEN with your Cloudflare Analytics token -->
+  <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "YOUR_CF_ANALYTICS_TOKEN"}'></script> -->
+</head>
+
+<body>
+  <!-- ─── Navigation ──────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__container">
+      <a href="/" class="nav__logo" aria-label="Luzerge home">
+        <span class="nav__logo-icon" aria-hidden="true">⚡</span>
+        Luzerge
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact" class="btn btn--outline">Get Started</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ────────────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero__container">
+      <div class="hero__badge">
+        <span class="badge">🇵🇭 Cebu-Based · Global Performance</span>
+      </div>
+      <h1 class="hero__heading" id="hero-heading">
+        Your Cebu Business,<br />
+        <span class="hero__accent">Blazing Fast Online</span>
+      </h1>
+      <p class="hero__subheading">
+        Professional websites powered by Cloudflare CDN — delivering your pages
+        in under 200ms to customers across the Philippines and beyond.
+        Free SSL included. No hidden fees.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Get a Free Audit</a>
+        <a href="#how-it-works" class="btn btn--ghost">See How It Works →</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__value">&lt;200ms</span>
+          <span class="stat__label">Load Time (PH)</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">99.9%</span>
+          <span class="stat__label">Uptime SLA</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Free</span>
+          <span class="stat__label">SSL + DDoS Protection</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">₱0</span>
+          <span class="stat__label">Setup for First 5 Clients</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services ────────────────────────────────────────────────────── -->
+  <section class="services" id="services" aria-labelledby="services-heading">
+    <div class="container">
+      <h2 class="section__heading" id="services-heading">What We Build</h2>
+      <p class="section__subheading">Everything your Cebu business needs to compete online.</p>
+      <div class="services__grid">
+        <article class="service-card">
+          <div class="service-card__icon" aria-hidden="true">🚀</div>
+          <h3 class="service-card__title">Starter Landing Page</h3>
+          <p class="service-card__desc">A fast, mobile-first landing page with your branding, contact form, and Google Maps integration. Perfect for new businesses.</p>
+          <ul class="service-card__features" role="list">
+            <li>Cloudflare CDN delivery</li>
+            <li>Free SSL certificate</li>
+            <li>Contact form with email alerts</li>
+            <li>Google Analytics setup</li>
+          </ul>
+          <a href="#pricing" class="btn btn--outline">From ₱2,500/mo</a>
+        </article>
+
+        <article class="service-card service-card--featured">
+          <div class="service-card__badge">Most Popular</div>
+          <div class="service-card__icon" aria-hidden="true">🏢</div>
+          <h3 class="service-card__title">Business Website</h3>
+          <p class="service-card__desc">A full multi-page website with a database backend for leads, products, or bookings. Built to scale with your business.</p>
+          <ul class="service-card__features" role="list">
+            <li>5–10 pages with CMS editing</li>
+            <li>Supabase database backend</li>
+            <li>Cloudflare WAF protection</li>
+            <li>Business email setup</li>
+          </ul>
+          <a href="#pricing" class="btn btn--primary">From ₱5,500/mo</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__icon" aria-hidden="true">🛍️</div>
+          <h3 class="service-card__title">E-Commerce / App</h3>
+          <p class="service-card__desc">Custom web application with product catalog, PayMongo payments, and a full CI/CD pipeline via GitHub Actions.</p>
+          <ul class="service-card__features" role="list">
+            <li>PayMongo payment integration</li>
+            <li>Real-time inventory updates</li>
+            <li>Automated deployments</li>
+            <li>Weekly database backups</li>
+          </ul>
+          <a href="#pricing" class="btn btn--outline">From ₱12,000/mo</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How It Works ────────────────────────────────────────────────── -->
+  <section class="how-it-works" id="how-it-works" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 class="section__heading" id="how-heading">How It Works</h2>
+      <p class="section__subheading">From domain to live site in 3–5 business days.</p>
+      <ol class="steps" role="list">
+        <li class="step">
+          <span class="step__number" aria-hidden="true">01</span>
+          <div class="step__content">
+            <h3>Buy Your Domain</h3>
+            <p>We register your .com domain through Cloudflare Registrar at cost (~$8.57/yr). You own it fully.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__number" aria-hidden="true">02</span>
+          <div class="step__content">
+            <h3>Connect Cloudflare CDN</h3>
+            <p>We configure DNS, SSL, caching rules, and WAF protection. Cebu users hit the Singapore edge node — under 60ms.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__number" aria-hidden="true">03</span>
+          <div class="step__content">
+            <h3>Deploy Your Site</h3>
+            <p>We build and push your site to GitHub. Every future update auto-deploys and purges the CDN cache.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__number" aria-hidden="true">04</span>
+          <div class="step__content">
+            <h3>Go Live & Grow</h3>
+            <p>You get a monthly performance report showing cache hit rates, speed scores, and leads captured.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─────────────────────────────────────────────────────── -->
+  <section class="pricing" id="pricing" aria-labelledby="pricing-heading">
+    <div class="container">
+      <h2 class="section__heading" id="pricing-heading">Transparent Pricing</h2>
+      <p class="section__subheading">No hidden fees. Cancel anytime after 3 months.</p>
+      <div class="pricing__grid">
+        <article class="pricing-card">
+          <h3 class="pricing-card__name">Starter</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱2,500</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">+ ₱8,000 one-time setup</p>
+          <ul class="pricing-card__features" role="list">
+            <li>✅ 1-page landing site</li>
+            <li>✅ Custom domain connection</li>
+            <li>✅ Cloudflare CDN + SSL</li>
+            <li>✅ Contact form</li>
+            <li>✅ Google Analytics</li>
+            <li>✅ 1 content update/month</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Get Started</a>
+        </article>
+
+        <article class="pricing-card pricing-card--featured">
+          <div class="pricing-card__badge">Best Value</div>
+          <h3 class="pricing-card__name">Business</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱5,500</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">+ ₱20,000 one-time setup</p>
+          <ul class="pricing-card__features" role="list">
+            <li>✅ 5–10 page website</li>
+            <li>✅ Database backend (leads/bookings)</li>
+            <li>✅ Cloudflare WAF rules</li>
+            <li>✅ Business email setup</li>
+            <li>✅ SEO on-page optimization</li>
+            <li>✅ 2 content updates/month</li>
+            <li>✅ Monthly performance report</li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">Get Started</a>
+        </article>
+
+        <article class="pricing-card">
+          <h3 class="pricing-card__name">E-Commerce</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱12,000</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">+ ₱50,000+ setup</p>
+          <ul class="pricing-card__features" role="list">
+            <li>✅ Custom web application</li>
+            <li>✅ PayMongo payments (PH)</li>
+            <li>✅ Product catalog + inventory</li>
+            <li>✅ Full CI/CD pipeline</li>
+            <li>✅ Weekly DB backups</li>
+            <li>✅ Priority support</li>
+            <li>✅ Unlimited content updates</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Contact Us</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact Form ─────────────────────────────────────────────────── -->
+  <section class="contact" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 class="section__heading" id="contact-heading">Get a Free Website Audit</h2>
+      <p class="section__subheading">
+        We'll analyze your current online presence and show you exactly how
+        much faster your site could load with CDN optimization.
+      </p>
+      <div class="contact__layout">
+        <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name *</label>
+            <input type="text" id="name" name="name" class="form-input"
+              placeholder="Juan dela Cruz" required minlength="2" maxlength="100"
+              autocomplete="name" />
+            <span class="form-error" id="nameError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input type="email" id="email" name="email" class="form-input"
+              placeholder="juan@yourbusiness.com" required autocomplete="email" />
+            <span class="form-error" id="emailError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone (Optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-input"
+              placeholder="+63 917 000 0000" autocomplete="tel" />
+          </div>
+
+          <div class="form-group">
+            <label for="service" class="form-label">Service Interested In</label>
+            <select id="service" name="service" class="form-input">
+              <option value="">Select a service...</option>
+              <option value="starter">Starter Landing Page</option>
+              <option value="business">Business Website</option>
+              <option value="ecommerce">E-Commerce / App</option>
+              <option value="custom">Custom Project</option>
+              <option value="other">Just Exploring</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Tell Us About Your Business *</label>
+            <textarea id="message" name="message" class="form-input form-textarea"
+              placeholder="What does your business do? Do you have an existing website? What are your goals?"
+              required minlength="10" maxlength="2000" rows="4"></textarea>
+            <span class="form-error" id="messageError" role="alert"></span>
+            <span class="form-hint" id="charCount">0 / 2000</span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+            Send Message →
+          </button>
+
+          <div class="form-success" id="formSuccess" role="alert" hidden>
+            <span aria-hidden="true">✅</span>
+            Thank you! We'll contact you within 24 hours.
+          </div>
+          <div class="form-error-global" id="formError" role="alert" hidden>
+            <span aria-hidden="true">❌</span>
+            Something went wrong. Please try again or email us directly.
+          </div>
+        </form>
+
+        <div class="contact__info">
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">📍</span>
+            <div>
+              <strong>Location</strong>
+              <p>Cebu City, Philippines</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">📧</span>
+            <div>
+              <strong>Email</strong>
+              <p><a href="mailto:hello@luzerge.com">hello@luzerge.com</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">⏱️</span>
+            <div>
+              <strong>Response Time</strong>
+              <p>Within 24 hours (Mon–Fri)</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">🌏</span>
+            <div>
+              <strong>CDN Edge</strong>
+              <p>Cloudflare Singapore PoP<br />~30ms from Cebu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="footer__logo">⚡ Luzerge</span>
+          <p>CDN-powered web services for Cebu businesses.</p>
+          <p>Built with Cloudflare + Supabase + GitHub.</p>
+        </div>
+        <nav class="footer__links" aria-label="Footer navigation">
+          <ul role="list">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; <span id="footerYear"></span> Luzerge. All rights reserved. | DTI Registered | Cebu City, PH</p>
+        <p class="footer__tech">
+          Powered by <a href="https://cloudflare.com" rel="noopener noreferrer" target="_blank">Cloudflare</a>
+          · <a href="https://supabase.com" rel="noopener noreferrer" target="_blank">Supabase</a>
+          · <a href="https://github.com" rel="noopener noreferrer" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
