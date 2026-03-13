@@ -1,9 +1,6 @@
 # Supabase project configuration
 # Documentation: https://supabase.com/docs/reference/cli/config
 
-[project]
-project_id = "luzerge-prod"
-
 [api]
 enabled = true
 port = 54321
@@ -11,13 +8,10 @@ schemas = ["public", "graphql_public"]
 extra_search_path = ["public", "extensions"]
 max_rows = 1000
 
-[api.tls]
-enabled = false
-
 [db]
 port = 54322
 shadow_port = 54320
-major_version = 15
+major_version = 17
 
 [db.pooler]
 enabled = false
@@ -35,7 +29,6 @@ max_header_length = 4096
 enabled = true
 port = 54323
 api_url = "http://127.0.0.1"
-openai_api_key = "env(OPENAI_API_KEY)"
 
 [inbucket]
 enabled = true
@@ -65,7 +58,6 @@ minimum_password_length = 8
 enable_signup = true
 double_confirm_changes = true
 enable_confirmations = true
-secure_email_change_enabled = true
 otp_length = 6
 otp_expiry = 3600
 
@@ -86,10 +78,3 @@ inspector_port = 8083
 enabled = true
 port = 54327
 backend = "postgres"
-
-[experimental]
-orioledb_version = ""
-s3_host = "env(S3_HOST)"
-s3_region = "env(S3_REGION)"
-s3_access_key = "env(S3_ACCESS_KEY)"
-s3_secret_key = "env(S3_SECRET_KEY)"
