@@ -1,0 +1,66 @@
+name: PR Preview
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build
+        run: |
+          if [ -f "package.json" ] && grep -q '"build"' package.json; then
+            npm ci && npm run build
+          else
+            cp -r src/ dist/ 2>/dev/null || mkdir -p dist
+            [ -f "src/index.html" ] && cp src/index.html dist/
+          fi
+
+      - name: Validate HTML
+        run: |
+          if [ -f "dist/index.html" ]; then
+            echo "HTML file exists and is $(wc -c < dist/index.html) bytes"
+          fi
+
+      - name: Comment PR with preview info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = context.payload.pull_request.head.sha.substring(0, 7)
+            const prNumber = context.payload.pull_request.number
+            const body = `## Preview Deploy
+
+            **Branch:** \`${{ github.head_ref }}\`
+            **Commit:** \`${sha}\`
+            **Status:** Build passed ✅
+
+            This PR will deploy to [luzerge.com](https://luzerge.com) when merged to main.
+
+            ### Changes Summary
+            - Modified files: ${context.payload.pull_request.changed_files}
+            - Additions: +${context.payload.pull_request.additions}
+            - Deletions: -${context.payload.pull_request.deletions}
+
+            > Merge to \`main\` to trigger production deployment and cache purge.`
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            })

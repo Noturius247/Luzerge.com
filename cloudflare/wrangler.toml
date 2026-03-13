@@ -1,0 +1,40 @@
+# Cloudflare Workers configuration
+# Deploy with: wrangler deploy
+# Docs: https://developers.cloudflare.com/workers/configuration/
+
+name            = "luzerge-edge"
+main            = "workers/edge-cache.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Bind to your luzerge.com zone
+[[routes]]
+pattern = "luzerge.com/*"
+zone_name = "luzerge.com"
+
+[[routes]]
+pattern = "www.luzerge.com/*"
+zone_name = "luzerge.com"
+
+# Environment variables (non-secret)
+[vars]
+ENVIRONMENT = "production"
+SITE_URL     = "https://luzerge.com"
+
+# KV namespace for edge-side caching (optional — upgrade)
+# [[kv_namespaces]]
+# binding = "CACHE_KV"
+# id      = "your-kv-namespace-id"
+
+# R2 bucket for large assets (optional — upgrade)
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "luzerge-assets"
+
+[build]
+command = ""
+
+# Dev environment (wrangler dev)
+[env.dev]
+name = "luzerge-edge-dev"
+vars = { ENVIRONMENT = "development", SITE_URL = "http://localhost:3000" }

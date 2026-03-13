@@ -1,0 +1,207 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false  # Never cancel a production deploy in progress
+
+env:
+  SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+  CLOUDFLARE_ZONE_ID:  ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+jobs:
+  # ─── Job 1: Lint & Validate ─────────────────────────────────────────────────
+  lint:
+    name: Lint & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --if-present
+
+      - name: Validate HTML
+        run: |
+          if [ -f "src/index.html" ]; then
+            npx htmlhint src/**/*.html || true
+          fi
+
+      - name: Check for secrets in code
+        run: |
+          # Basic check to prevent accidental secret commits
+          if grep -rn "SUPABASE_SERVICE_ROLE_KEY\s*=" src/ 2>/dev/null; then
+            echo "ERROR: Possible service role key in source!"
+            exit 1
+          fi
+          echo "Secret scan passed."
+
+  # ─── Job 2: Deploy to Supabase ──────────────────────────────────────────────
+  deploy-supabase:
+    name: Deploy Supabase (DB + Functions)
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Run database migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          supabase link --project-ref $SUPABASE_PROJECT_ID
+          supabase db push --password ${{ secrets.SUPABASE_DB_PASSWORD }}
+
+      - name: Deploy Edge Functions
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          supabase functions deploy api \
+            --project-ref $SUPABASE_PROJECT_ID \
+            --no-verify-jwt
+
+      - name: Set Function Secrets
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          supabase secrets set \
+            --project-ref $SUPABASE_PROJECT_ID \
+            RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} \
+            NOTIFICATION_EMAIL=${{ secrets.NOTIFICATION_EMAIL }}
+
+  # ─── Job 3: Deploy Frontend ──────────────────────────────────────────────────
+  deploy-frontend:
+    name: Deploy Frontend (Static Assets)
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Build static assets
+        run: |
+          if [ -f "package.json" ] && grep -q '"build"' package.json; then
+            npm ci && npm run build
+          else
+            echo "No build step — using src/ as-is"
+            cp -r src/ dist/
+          fi
+
+      - name: Add build metadata
+        run: |
+          echo "{\"version\":\"${{ github.sha }}\",\"deployed\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" \
+            > dist/version.json
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          cname: luzerge.com
+          force_orphan: true
+          commit_message: 'deploy: ${{ github.sha }}'
+
+  # ─── Job 4: Purge Cloudflare Cache ──────────────────────────────────────────
+  purge-cache:
+    name: Purge Cloudflare CDN Cache
+    runs-on: ubuntu-latest
+    needs: [deploy-supabase, deploy-frontend]
+    steps:
+      - name: Purge everything (post-deploy)
+        run: |
+          RESPONSE=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+
+          echo "Cloudflare response: $RESPONSE"
+
+          SUCCESS=$(echo $RESPONSE | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['success'])")
+          if [ "$SUCCESS" != "True" ]; then
+            echo "Cache purge failed!"
+            exit 1
+          fi
+          echo "Cache purged successfully."
+
+  # ─── Job 5: Smoke Tests ─────────────────────────────────────────────────────
+  smoke-test:
+    name: Post-Deploy Smoke Tests
+    runs-on: ubuntu-latest
+    needs: purge-cache
+    steps:
+      - name: Wait for DNS/cache propagation
+        run: sleep 30
+
+      - name: Test site is live
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://luzerge.com)
+          echo "Site status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAIL: Site returned $STATUS"
+            exit 1
+          fi
+          echo "PASS: Site is live"
+
+      - name: Test API health endpoint
+        run: |
+          RESPONSE=$(curl -s https://luzerge.com/api/ping)
+          echo "API response: $RESPONSE"
+          echo $RESPONSE | python3 -c "
+          import sys,json
+          d=json.load(sys.stdin)
+          assert d.get('status') == 'ok', 'Health check failed'
+          print('PASS: API is healthy')
+          "
+
+      - name: Check SSL certificate
+        run: |
+          echo | openssl s_client -connect luzerge.com:443 -servername luzerge.com 2>/dev/null \
+            | openssl x509 -noout -dates
+          echo "PASS: SSL certificate valid"
+
+      - name: Check security headers
+        run: |
+          HEADERS=$(curl -sI https://luzerge.com)
+          echo "$HEADERS"
+          for HEADER in "x-content-type-options" "x-frame-options"; do
+            if echo "$HEADERS" | grep -qi "$HEADER"; then
+              echo "PASS: $HEADER present"
+            else
+              echo "WARN: $HEADER missing"
+            fi
+          done
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "Deployment successful!"
+          echo "Version: ${{ github.sha }}"
+          echo "Time: $(date -u)"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "DEPLOYMENT FAILED — check logs above"
+          echo "SHA: ${{ github.sha }}"

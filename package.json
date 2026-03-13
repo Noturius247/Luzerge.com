@@ -1,0 +1,22 @@
+{
+  "name": "luzerge-com",
+  "version": "1.0.0",
+  "description": "CDN-powered business platform for Cebu, PH",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "supabase start && npx serve src -p 3000",
+    "deploy": "supabase db push && supabase functions deploy",
+    "test:cdn": "bash scripts/test-cdn.sh",
+    "setup": "bash scripts/setup.sh",
+    "lint:html": "npx htmlhint src/**/*.html",
+    "purge-cache": "node scripts/purge-cache.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "htmlhint": "^1.1.4",
+    "serve": "^14.2.1"
+  }
+}

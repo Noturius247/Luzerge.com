@@ -1,0 +1,47 @@
+# ─── Environment secrets — NEVER commit ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+# Exception: example file is safe to commit
+!.env.example
+
+# ─── Supabase local dev ──────────────────────────────────────────────────────
+supabase/.branches
+supabase/.temp
+
+# ─── Build outputs ───────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+out/
+
+# ─── Node ────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# ─── Cloudflare Workers ──────────────────────────────────────────────────────
+.wrangler/
+cloudflare/workers/dist/
+
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─── Editor ──────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── Misc ────────────────────────────────────────────────────────────────────
+*.log
+curl-format.txt
