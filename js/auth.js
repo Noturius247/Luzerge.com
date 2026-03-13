@@ -1,0 +1,50 @@
+/**
+ * Luzerge — Auth helper (shared across login + dashboard pages)
+ * Initializes Supabase client and exposes session utilities.
+ */
+
+'use strict'
+
+const SUPABASE_URL = 'https://byzuraeyhrxxpztredri.supabase.co'
+const SUPABASE_ANON_KEY = 'REDACTED_ROTATE_THIS_KEY'
+
+// Global supabase client (available to all inline scripts)
+// eslint-disable-next-line no-unused-vars
+const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+/**
+ * Returns the current session, or null if not logged in.
+ */
+async function getSession() {
+  const { data: { session } } = await _supabase.auth.getSession()
+  return session
+}
+
+/**
+ * Returns the current user, or null if not logged in.
+ */
+async function getUser() {
+  const { data: { user } } = await _supabase.auth.getUser()
+  return user
+}
+
+/**
+ * Signs the user out and redirects to login.
+ */
+async function signOut() {
+  await _supabase.auth.signOut()
+  window.location.replace('/login.html')
+}
+
+/**
+ * Guard: if not logged in, redirect to login page.
+ * Call at the top of protected pages.
+ */
+async function requireAuth() {
+  const session = await getSession()
+  if (!session) {
+    window.location.replace('/login.html')
+    return null
+  }
+  return session
+}
