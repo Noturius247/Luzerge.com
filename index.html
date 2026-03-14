@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Luzerge — Affordable Websites for Cebu SMEs</title>
+  <meta name="description" content="Get a professional website for your Cebu business starting at ₱99/month. No setup fees. Fast, secure, and mobile-friendly. Free consultation." />
+  <meta name="keywords" content="web design Cebu, affordable website Philippines, website para sa negosyo Cebu, Cebu web developer, mura website Cebu" />
+  <link rel="canonical" href="https://luzerge.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luzerge.com/" />
+  <meta property="og:title" content="Luzerge — Affordable Websites for Cebu SMEs" />
+  <meta property="og:description" content="Professional website for your Cebu business starting at ₱99/month. No setup fees. Fast, secure, mobile-friendly." />
+  <meta property="og:image" content="https://luzerge.com/img/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Luzerge — Affordable Websites for Cebu SMEs" />
+  <meta name="twitter:description" content="Professional website for your Cebu business from ₱99/mo. No setup fees." />
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Luzerge",
+    "url": "https://luzerge.com",
+    "email": "hello@luzerge.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cebu City",
+      "addressRegion": "Cebu",
+      "addressCountry": "PH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 10.3157,
+      "longitude": 123.8854
+    },
+    "priceRange": "₱",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "serviceArea": {
+      "@type": "Place",
+      "name": "Cebu, Philippines"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+  <link rel="preload" href="/css/styles.css" as="style" />
+  <link rel="preload" href="/js/app.js" as="script" />
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <!-- ─── Navigation ──────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__container">
+      <a href="/" class="nav__logo" aria-label="Luzerge home">
+        <svg class="nav__logo-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/></svg>
+        Luzerge
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="#problems">Why Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="btn btn--outline">Free Consultation</a></li>
+        <li><a href="/login.html" class="btn btn--primary">Login</a></li>
+      </ul>
+      <button type="button" class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ────────────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <canvas id="heroStarfield" class="hero__starfield" aria-hidden="true"></canvas>
+    <div class="hero__container">
+      <div class="hero__badge">
+        <span class="badge">Cebu-Based · Serving SMEs Since 2026</span>
+      </div>
+      <h1 class="hero__heading" id="hero-heading">
+        Your Cebu Business Deserves<br />
+        <span class="hero__accent">A Real Website</span>
+      </h1>
+      <p class="hero__subheading">
+        We build fast, professional websites for Cebu small businesses —
+        restaurants, salons, clinics, shops, and more.
+        Starting at <strong>₱99/month</strong>. No setup fees. No tech knowledge needed.
+        <strong>First month FREE</strong> — try it risk-free!
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Get a Free Consultation</a>
+        <a href="#pricing" class="btn btn--ghost">View Pricing →</a>
+      </div>
+      <div class="hero__stats" data-parallax="slow">
+        <div class="stat">
+          <span class="stat__value" data-count="99" data-prefix="₱">₱99</span>
+          <span class="stat__label">Starting Price/mo</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">3–5</span>
+          <span class="stat__label">Days to Go Live</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Free</span>
+          <span class="stat__label">SSL + Security</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">1 Month</span>
+          <span class="stat__label">Free Trial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Problems We Solve ───────────────────────────────────────────── -->
+  <section class="problems" id="problems" aria-labelledby="problems-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="problems-heading" data-scroll-reveal>Sound Familiar?</h2>
+      <p class="section__subheading" data-scroll-reveal>These are the most common problems Cebu SMEs face online.</p>
+      <div class="problems__grid">
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>"My website is too slow — customers leave before it loads."</h3>
+          <p class="problem-card__solution">We fix this. Our sites load in under 2 seconds anywhere in the Philippines.</p>
+        </div>
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"/><line x1="12" y1="18" x2="12" y2="18.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <h3>"My website doesn't look good on mobile phones."</h3>
+          <p class="problem-card__solution">Every site we build is 100% mobile-first — perfect on any phone.</p>
+        </div>
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>"I paid a big upfront fee and got nothing after."</h3>
+          <p class="problem-card__solution">We charge monthly — no big setup fees. If you're not happy, cancel anytime.</p>
+        </div>
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <h3>"Customers can't find my business on Google."</h3>
+          <p class="problem-card__solution">We set up Google Business, SEO basics, and Google Analytics so you show up.</p>
+        </div>
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>"My website shows 'Not Secure' in the browser."</h3>
+          <p class="problem-card__solution">Free SSL certificate on every plan. Your site will always show the padlock.</p>
+        </div>
+        <div class="problem-card" data-scroll-reveal>
+          <span class="problem-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M23 4l-2.5 2.5M17.5 6.5l2-2M14.5 9.5l-1-1M1 21l3-3M7.5 14.5l1 1M11 12l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14.5 9.5L18 6M7.5 14.5L4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 11l-1.5 1.5L11 18l-4 1 1-4 5.5-5.5L15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>"I can't update my website — I have to call someone every time."</h3>
+          <p class="problem-card__solution">Content updates are included in every plan. Just message us on Viber.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services ────────────────────────────────────────────────────── -->
+  <section class="services" id="services" aria-labelledby="services-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="services-heading" data-scroll-reveal>What We Build</h2>
+      <p class="section__subheading" data-scroll-reveal>Simple solutions for real Cebu businesses.</p>
+      <div class="services__grid">
+        <article class="service-card" data-scroll-reveal>
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="service-card__title">Business Profile Page</h3>
+          <p class="service-card__desc">Perfect for sari-sari stores, salons, clinics, food stalls — any business that needs to be found online fast.</p>
+          <ul class="service-card__features" role="list">
+            <li>1 page with your info & photos</li>
+            <li>Contact form + Google Maps</li>
+            <li>Mobile-friendly design</li>
+            <li>Free SSL (padlock icon)</li>
+          </ul>
+          <a href="#pricing" class="btn btn--outline">From ₱99/mo · 1st Month Free</a>
+        </article>
+
+        <article class="service-card service-card--featured" data-scroll-reveal>
+          <div class="service-card__badge">Most Popular</div>
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="service-card__title">Full Business Website</h3>
+          <p class="service-card__desc">For restaurants, hotels, clinics, and shops that need multiple pages, online booking, or a product catalog.</p>
+          <ul class="service-card__features" role="list">
+            <li>Up to 5 pages</li>
+            <li>Online inquiry / booking form</li>
+            <li>Google Analytics + SEO setup</li>
+            <li>Viber / Facebook chat button</li>
+            <li>2 free updates per month</li>
+          </ul>
+          <a href="#pricing" class="btn btn--primary">From ₱199/mo · 1st Month Free</a>
+        </article>
+
+        <article class="service-card" data-scroll-reveal>
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="2"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="service-card__title">Online Store</h3>
+          <p class="service-card__desc">Sell your products online with GCash and Maya payments. Perfect for ukay-ukay, food delivery, and retail shops.</p>
+          <ul class="service-card__features" role="list">
+            <li>Product catalog with photos</li>
+            <li>GCash / Maya / COD checkout</li>
+            <li>Order management system</li>
+            <li>Unlimited products</li>
+            <li>Priority Viber support</li>
+          </ul>
+          <a href="#pricing" class="btn btn--outline">From ₱299/mo · 1st Month Free</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How It Works ────────────────────────────────────────────────── -->
+  <section class="how-it-works" id="how-it-works" aria-labelledby="how-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="how-heading" data-scroll-reveal>How It Works</h2>
+      <p class="section__subheading" data-scroll-reveal>We handle everything. You just provide the content.</p>
+      <ol class="steps" role="list">
+        <li class="step" data-scroll-reveal>
+          <span class="step__number" aria-hidden="true">01</span>
+          <div class="step__content">
+            <h3>Free Consultation</h3>
+            <p>Fill out the form below or message us on Viber. We'll call you within 24 hours to understand your business and what you need.</p>
+          </div>
+        </li>
+        <li class="step" data-scroll-reveal>
+          <span class="step__number" aria-hidden="true">02</span>
+          <div class="step__content">
+            <h3>We Design & Build</h3>
+            <p>Send us your logo, photos, and text — or we'll help you create them. We build your site in 3–5 business days.</p>
+          </div>
+        </li>
+        <li class="step" data-scroll-reveal>
+          <span class="step__number" aria-hidden="true">03</span>
+          <div class="step__content">
+            <h3>Review & Go Live</h3>
+            <p>You review the site. We make changes until you're happy. Then we go live — your customers can find you online.</p>
+          </div>
+        </li>
+        <li class="step" data-scroll-reveal>
+          <span class="step__number" aria-hidden="true">04</span>
+          <div class="step__content">
+            <h3>We Maintain It For You</h3>
+            <p>We handle hosting, security, and updates every month. Just message us on Viber when you need changes.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─────────────────────────────────────────────────────── -->
+  <section class="pricing" id="pricing" aria-labelledby="pricing-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="pricing-heading" data-scroll-reveal>Simple, Honest Pricing</h2>
+      <p class="section__subheading" data-scroll-reveal>No setup fees. No hidden charges. <strong class="text-accent">First month FREE</strong> — try it risk-free, cancel anytime.</p>
+      <div class="pricing__grid">
+        <article class="pricing-card" data-scroll-reveal>
+          <h3 class="pricing-card__name">Starter</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱99</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">1st month FREE · No setup fee</p>
+          <ul class="pricing-card__features" role="list">
+            <li>1-page business profile</li>
+            <li>Your own .com domain</li>
+            <li>Mobile-friendly design</li>
+            <li>Free SSL (padlock)</li>
+            <li>Contact form</li>
+            <li>Google Maps embed</li>
+            <li>1 update/month via Viber</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Get Started</a>
+        </article>
+
+        <article class="pricing-card pricing-card--featured" data-scroll-reveal>
+          <div class="pricing-card__badge">Best Value</div>
+          <h3 class="pricing-card__name">Business</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱199</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">1st month FREE · No setup fee</p>
+          <ul class="pricing-card__features" role="list">
+            <li>Up to 5 pages</li>
+            <li>Online booking / inquiry form</li>
+            <li>Google Analytics</li>
+            <li>Basic SEO setup</li>
+            <li>Facebook / Viber chat button</li>
+            <li>Google Business setup</li>
+            <li>2 updates/month via Viber</li>
+            <li>Monthly performance report</li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">Get Started</a>
+        </article>
+
+        <article class="pricing-card" data-scroll-reveal>
+          <h3 class="pricing-card__name">Online Store</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">₱299</span>
+            <span class="pricing-card__period">/month</span>
+          </div>
+          <p class="pricing-card__setup">1st month FREE · No setup fee</p>
+          <ul class="pricing-card__features" role="list">
+            <li>Product catalog (unlimited)</li>
+            <li>GCash / Maya payments</li>
+            <li>Order management</li>
+            <li>Inventory tracking</li>
+            <li>Customer order notifications</li>
+            <li>Priority Viber support</li>
+            <li>Unlimited updates</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline">Get Started</a>
+        </article>
+      </div>
+      <p class="pricing__note">
+        All plans include: free hosting, free SSL, DDoS protection, and daily backups.
+        Prices are in Philippine Peso. Domain renewal (~₱500/yr) is separate.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
+  <section class="faq" id="faq" aria-labelledby="faq-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="faq-heading" data-scroll-reveal>Common Questions</h2>
+      <p class="section__subheading" data-scroll-reveal>From Cebu business owners like you.</p>
+      <div class="faq__list">
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">Kailangan ba nako mag-alam sa tech para mag-avail?</summary>
+          <p class="faq__answer">Dili! Kami bahala sa tanan. Mag-send lang ug imong logo, photos, ug imong gusto isulti sa imong website — kami na ang bahala sa uban.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">Do I need technical knowledge to get a website?</summary>
+          <p class="faq__answer">No. We handle everything from design to launch. Just send us your business info, photos, and logo — we do the rest.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">Why is there no setup fee?</summary>
+          <p class="faq__answer">We removed setup fees because we know it's a big barrier for small businesses. Instead, we earn through the monthly subscription — so we're motivated to keep you happy long-term.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">Can I cancel anytime?</summary>
+          <p class="faq__answer">Yes! Your first month is completely free — no payment needed upfront. After that, cancel anytime. No lock-in contracts. If you're not happy, just let us know and we'll stop billing you. You keep your domain.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">What if I already have a website that's slow?</summary>
+          <p class="faq__answer">We can migrate your existing website and speed it up — often cutting load time by 50–80%. Contact us for a free speed audit.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">How do I pay? GCash ba?</summary>
+          <p class="faq__answer">Yes! We accept GCash, Maya, bank transfer (BDO/BPI/UnionBank), and cash. Monthly billing — pay when you're satisfied each month.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">How long does it take to build my website?</summary>
+          <p class="faq__answer">3–5 business days for Starter and Business plans. Online stores take 7–10 days. We'll keep you updated throughout.</p>
+        </details>
+        <details class="faq__item" data-scroll-reveal>
+          <summary class="faq__question">Do you serve clients outside Cebu?</summary>
+          <p class="faq__answer">Yes! We work with businesses all over the Philippines. We communicate via Viber, email, and Zoom — no need to meet in person.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact Form ─────────────────────────────────────────────────── -->
+  <section class="contact" id="contact" aria-labelledby="contact-heading" data-scroll-section>
+    <div class="container">
+      <h2 class="section__heading" id="contact-heading" data-scroll-reveal>Get a Free Consultation</h2>
+      <p class="section__subheading" data-scroll-reveal>
+        Tell us about your business and we'll call you back within 24 hours.
+        No commitment required.
+      </p>
+      <div class="contact__layout">
+        <form class="contact-form" id="contactForm" novalidate aria-label="Contact form" data-scroll-reveal>
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name *</label>
+            <input type="text" id="name" name="name" class="form-input"
+              placeholder="Juan dela Cruz" required minlength="2" maxlength="100"
+              autocomplete="name" />
+            <span class="form-error" id="nameError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input type="email" id="email" name="email" class="form-input"
+              placeholder="juan@yourbusiness.com" required autocomplete="email" />
+            <span class="form-error" id="emailError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone / Viber Number</label>
+            <input type="tel" id="phone" name="phone" class="form-input"
+              placeholder="+63 917 000 0000" autocomplete="tel" />
+          </div>
+
+          <div class="form-group">
+            <label for="service" class="form-label">What do you need?</label>
+            <select id="service" name="service" class="form-input">
+              <option value="">Select a service...</option>
+              <option value="starter">Starter — Business Profile (₱99/mo)</option>
+              <option value="business">Business Website (₱199/mo)</option>
+              <option value="ecommerce">Online Store (₱299/mo)</option>
+              <option value="speedup">Speed up my existing website</option>
+              <option value="other">Not sure yet — just exploring</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Tell us about your business *</label>
+            <textarea id="message" name="message" class="form-input form-textarea"
+              placeholder="What type of business do you have? Do you already have a website? What problem are you trying to solve?"
+              required minlength="10" maxlength="2000" rows="4"></textarea>
+            <span class="form-error" id="messageError" role="alert"></span>
+            <span class="form-hint" id="charCount">0 / 2000</span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+            Send Message — It's Free →
+          </button>
+
+          <div class="form-success" id="formSuccess" role="alert" hidden>
+            Salamat! We'll contact you within 24 hours.
+          </div>
+          <div class="form-error-global" id="formError" role="alert" hidden>
+            Something went wrong. Please try again or email us directly.
+          </div>
+        </form>
+
+        <div class="contact__info" data-scroll-reveal>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+            <div>
+              <strong>Location</strong>
+              <p>Cebu City, Philippines</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <div>
+              <strong>Email</strong>
+              <p><a href="mailto:hello@luzerge.com">hello@luzerge.com</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <strong>Viber / WhatsApp</strong>
+              <p>Message us anytime</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <div>
+              <strong>Response Time</strong>
+              <p>Within 24 hours (Mon–Sat)</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-item__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+            <div>
+              <strong>Payment</strong>
+              <p>GCash · Maya · Bank Transfer · Cash</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="footer__logo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/></svg>
+            Luzerge
+          </span>
+          <p>Affordable websites for Cebu small businesses.</p>
+          <p>Fast, secure, and maintained monthly.</p>
+        </div>
+        <nav class="footer__links" aria-label="Footer navigation">
+          <ul role="list">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; <span id="footerYear"></span> Luzerge. All rights reserved. | DTI Registered | Cebu City, PH</p>
+        <p class="footer__tech">
+          Powered by <a href="https://cloudflare.com" rel="noopener noreferrer" target="_blank">Cloudflare</a>
+          · <a href="https://supabase.com" rel="noopener noreferrer" target="_blank">Supabase</a>
+          · <a href="https://github.com" rel="noopener noreferrer" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-driven rocket (fixed position, won't affect layout) -->
+  <div class="rocket" id="scrollRocket" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4c-6 8-10 20-10 32h20C42 24 38 12 32 4z" fill="url(#rk-body)"/>
+      <path d="M22 36c-6 2-10 8-10 12h10V36z" fill="url(#rk-fin)"/>
+      <path d="M42 36c6 2 10 8 10 12H42V36z" fill="url(#rk-fin)"/>
+      <circle cx="32" cy="26" r="4" fill="#0a0e1a" stroke="#06b6d4" stroke-width="1.5"/>
+      <path d="M26 48c2 6 4 10 6 14 2-4 4-8 6-14H26z" fill="url(#rk-flame)"/>
+      <defs>
+        <linearGradient id="rk-body" x1="32" y1="4" x2="32" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#e2e8f0"/><stop offset="1" stop-color="#94a3b8"/>
+        </linearGradient>
+        <linearGradient id="rk-fin" x1="0" y1="36" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/>
+        </linearGradient>
+        <linearGradient id="rk-flame" x1="32" y1="48" x2="32" y2="62" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#f59e0b"/><stop offset=".5" stop-color="#ef4444"/><stop offset="1" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
