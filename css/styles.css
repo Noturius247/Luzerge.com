@@ -102,6 +102,55 @@ a { color: var(--color-brand); text-decoration: none; }
 a:hover { text-decoration: underline; }
 ul[role="list"] { list-style: none; }
 
+/* ─── Scroll progress bar ──────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-accent), var(--color-accent-2));
+  z-index: 200;
+  transition: width 50ms linear;
+  box-shadow: 0 0 10px var(--color-brand-glow);
+}
+
+/* ─── Scroll-driven rocket ─────────────────────────────────── */
+.rocket {
+  position: fixed;
+  right: 2rem;
+  bottom: -80px;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.5));
+  pointer-events: none;
+}
+
+.rocket.is-visible {
+  opacity: 1;
+}
+
+.rocket svg {
+  transform: rotate(-15deg);
+  animation: rocket-float 3s ease-in-out infinite;
+}
+
+@keyframes rocket-float {
+  0%, 100% { transform: rotate(-15deg) translateY(0); }
+  50%      { transform: rotate(-15deg) translateY(-8px); }
+}
+
+/* Rocket flame flicker */
+.rocket.is-visible svg path:last-of-type {
+  animation: flame-flicker 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes flame-flicker {
+  0%   { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
 /* ─── Utilities ─────────────────────────────────────────────── */
 .container {
   width: 100%;
@@ -399,7 +448,17 @@ ul[role="list"] { list-style: none; }
   box-shadow: var(--glow-cyan);
 }
 
-.problem-card__icon { font-size: 2rem; display: block; margin-bottom: .75rem; }
+.problem-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15));
+  color: var(--color-accent);
+  margin-bottom: .75rem;
+}
 .problem-card h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: .5rem; color: var(--color-text); }
 .problem-card__solution { color: var(--color-text-muted); font-size: .9375rem; }
 
@@ -459,7 +518,16 @@ ul[role="list"] { list-style: none; }
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-.service-card__icon { font-size: 2rem; }
+.service-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.15));
+  color: var(--color-brand);
+}
 .service-card__title { font-size: 1.25rem; font-weight: 700; color: var(--color-text); }
 .service-card__desc { color: var(--color-text-muted); font-size: .9375rem; flex: 1; }
 
@@ -745,7 +813,17 @@ details[open] .faq__question::after {
   align-items: flex-start;
 }
 
-.contact-info-item__icon { font-size: 1.5rem; flex-shrink: 0; }
+.contact-info-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15));
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
 
 .contact-info-item strong { display: block; font-weight: 600; margin-bottom: .25rem; color: var(--color-text); }
 .contact-info-item p { color: var(--color-text-muted); font-size: .9375rem; }
@@ -786,6 +864,37 @@ details[open] .faq__question::after {
 
 .footer__tech a { color: var(--color-text-muted); }
 .footer__tech a:hover { color: var(--color-accent); }
+
+/* ─── Scroll-driven reveal animations ──────────────────────── */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-scroll-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sections get a subtle parallax shift */
+[data-scroll-section] {
+  will-change: transform;
+}
+
+/* Pricing card features use check icon color */
+.pricing-card__features li::before {
+  content: "✓ ";
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Footer logo icon */
+.footer__logo svg {
+  display: inline;
+  vertical-align: -3px;
+  margin-right: 4px;
+}
 
 /* ─── Keyframe Animations ──────────────────────────────────── */
 @keyframes shimmer-border {

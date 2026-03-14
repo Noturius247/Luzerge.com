@@ -1,7 +1,8 @@
 /**
  * Luzerge.com — Frontend JavaScript
  * Handles: contact form, nav mobile menu, analytics, char count,
- *          starfield, scroll animations, parallax, hero reveal
+ *          starfield, scroll animations, parallax, hero reveal,
+ *          scroll-driven rocket, scroll progress bar
  */
 
 'use strict'
@@ -25,13 +26,12 @@ function trackEvent(eventType, extra = {}) {
     ...extra,
   }
 
-  // Non-blocking — don't await, don't block UX
   fetch(`${API_BASE}/analytics`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
     keepalive: true,
-  }).catch(() => {})  // Silently fail — analytics is non-critical
+  }).catch(() => {})
 }
 
 // ─── Contact form ─────────────────────────────────────────────────────────────
@@ -46,14 +46,12 @@ function initContactForm() {
   const charCount = document.getElementById('charCount')
   const messageInput = document.getElementById('message')
 
-  // Character counter
   if (messageInput && charCount) {
     messageInput.addEventListener('input', () => {
       charCount.textContent = `${messageInput.value.length} / 2000`
     })
   }
 
-  // Track form start
   let formStarted = false
   form.addEventListener('focusin', () => {
     if (!formStarted) {
@@ -64,13 +62,10 @@ function initContactForm() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
-
-    // Clear previous errors
     clearErrors()
     formSuccess.hidden = true
     formError.hidden = true
 
-    // Gather and validate
     const data = {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
@@ -81,7 +76,6 @@ function initContactForm() {
 
     if (!validate(data)) return
 
-    // Submit
     submitBtn.disabled = true
     submitBtn.textContent = 'Sending…'
     trackEvent('form_submit')
@@ -165,7 +159,6 @@ function initMobileNav() {
     toggle.setAttribute('aria-expanded', isOpen.toString())
   })
 
-  // Close on link click
   links.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       links.classList.remove('is-open')
@@ -173,7 +166,6 @@ function initMobileNav() {
     })
   })
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (!toggle.contains(e.target) && !links.contains(e.target)) {
       links.classList.remove('is-open')
@@ -189,51 +181,47 @@ function setFooterYear() {
   if (el) el.textContent = new Date().getFullYear()
 }
 
-// ─── Enhanced scroll animations with stagger ─────────────────────────────────
+// ─── Scroll-driven reveal animations ──────────────────────────────────────────
 
-function initScrollAnimations() {
+function initScrollReveals() {
   if (!('IntersectionObserver' in window)) return
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Show everything immediately
+    document.querySelectorAll('[data-scroll-reveal]').forEach(el => {
+      el.style.opacity = '1'
+      el.style.transform = 'none'
+    })
+    return
+  }
 
-  const style = document.createElement('style')
-  style.textContent = `
-    .animate-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .animate-in[data-animate="left"] {
-      transform: translateX(-40px);
-    }
-    .animate-in[data-animate="right"] {
-      transform: translateX(40px);
-    }
-    .animate-in.visible {
-      opacity: 1;
-      transform: none;
-    }
-  `
-  document.head.appendChild(style)
+  // Track reveal index per parent for stagger
+  const revealedParents = new WeakMap()
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const parent = entry.target.parentElement
-          const siblings = Array.from(parent.children).filter(c => c.classList.contains('animate-in'))
-          const index = siblings.indexOf(entry.target)
-          entry.target.style.transitionDelay = `${index * 100}ms`
-          entry.target.classList.add('visible')
+        if (!entry.isIntersecting) return
+
+        const el = entry.target
+        const parent = el.parentElement
+
+        // Stagger delay based on sibling order
+        if (!revealedParents.has(parent)) {
+          revealedParents.set(parent, 0)
         }
+        const index = revealedParents.get(parent)
+        revealedParents.set(parent, index + 1)
+
+        el.style.transitionDelay = (index * 80) + 'ms'
+        el.classList.add('is-revealed')
+
+        observer.unobserve(el)
       })
     },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
   )
 
-  document.querySelectorAll(
-    '.service-card, .step, .pricing-card, .problem-card, .faq__item, .contact-info-item'
-  ).forEach(el => {
-    el.classList.add('animate-in')
+  document.querySelectorAll('[data-scroll-reveal]').forEach(el => {
     observer.observe(el)
   })
 }
@@ -280,7 +268,6 @@ function initStarfield() {
       ctx.fillStyle = 'rgba(255, 255, 255, ' + (star.opacity * flicker) + ')'
       ctx.fill()
 
-      // Drift stars downward slowly
       star.y += star.speed
       if (star.y > canvas.height) {
         star.y = 0
@@ -299,7 +286,6 @@ function initStarfield() {
     createStars()
   })
 
-  // Pause when hero is offscreen for performance
   const observer = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) {
       if (!animId) animId = requestAnimationFrame(draw)
@@ -311,33 +297,6 @@ function initStarfield() {
     }
   })
   observer.observe(canvas)
-}
-
-// ─── Parallax effect on hero stats ────────────────────────────────────────────
-
-function initParallax() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-  const hero = document.querySelector('.hero')
-  const stats = document.querySelector('.hero__stats')
-  if (!hero || !stats) return
-
-  let ticking = false
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        const scrolled = window.scrollY
-        const heroHeight = hero.offsetHeight
-        if (scrolled < heroHeight) {
-          const factor = scrolled / heroHeight
-          stats.style.transform = 'translateY(' + (factor * -20) + 'px)'
-          stats.style.opacity = 1 - factor * 0.3
-        }
-        ticking = false
-      })
-      ticking = true
-    }
-  })
 }
 
 // ─── Hero accent text reveal ──────────────────────────────────────────────────
@@ -358,27 +317,91 @@ function initHeroReveal() {
   }, 300)
 }
 
-// ─── Navbar scroll effect ─────────────────────────────────────────────────────
+// ─── Scroll-driven effects (rocket, progress bar, nav, parallax) ─────────────
 
-function initNavScroll() {
+function initScrollEffects() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const nav = document.querySelector('.nav')
-  if (!nav) return
+  const rocket = document.getElementById('scrollRocket')
+  const progressBar = document.getElementById('scrollProgress')
+  const hero = document.querySelector('.hero')
+  const stats = document.querySelector('.hero__stats')
+  const sections = document.querySelectorAll('[data-scroll-section]')
 
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-      nav.style.background = 'rgba(10, 14, 26, 0.95)'
-      nav.style.borderBottomColor = 'rgba(59, 130, 246, 0.2)'
-    } else {
-      nav.style.background = 'rgba(10, 14, 26, 0.85)'
-      nav.style.borderBottomColor = 'rgba(255, 255, 255, 0.1)'
-    }
-  })
+  let ticking = false
+
+  function onScroll() {
+    if (ticking) return
+    ticking = true
+
+    requestAnimationFrame(function() {
+      const scrollY = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0
+
+      // ── Scroll progress bar
+      if (progressBar) {
+        progressBar.style.width = (scrollPercent * 100) + '%'
+      }
+
+      // ── Nav solidify on scroll
+      if (nav) {
+        if (scrollY > 50) {
+          nav.style.background = 'rgba(10, 14, 26, 0.95)'
+          nav.style.borderBottomColor = 'rgba(59, 130, 246, 0.2)'
+        } else {
+          nav.style.background = 'rgba(10, 14, 26, 0.85)'
+          nav.style.borderBottomColor = 'rgba(255, 255, 255, 0.1)'
+        }
+      }
+
+      // ── Rocket flies up as you scroll
+      if (rocket && !reducedMotion) {
+        if (scrollPercent > 0.05) {
+          rocket.classList.add('is-visible')
+          // Rocket moves from bottom to top of viewport
+          var rocketY = (1 - scrollPercent) * 80 + 10
+          rocket.style.bottom = rocketY + '%'
+        } else {
+          rocket.classList.remove('is-visible')
+        }
+      }
+
+      // ── Hero parallax (stats float, hero content fades)
+      if (!reducedMotion && hero && stats) {
+        var heroH = hero.offsetHeight
+        if (scrollY < heroH) {
+          var factor = scrollY / heroH
+          stats.style.transform = 'translateY(' + (factor * -30) + 'px)'
+          stats.style.opacity = 1 - factor * 0.4
+        }
+      }
+
+      // ── Subtle parallax on sections (shift content slightly)
+      if (!reducedMotion) {
+        sections.forEach(function(section) {
+          var rect = section.getBoundingClientRect()
+          var winH = window.innerHeight
+          if (rect.top < winH && rect.bottom > 0) {
+            var progress = (winH - rect.top) / (winH + rect.height)
+            var shift = (progress - 0.5) * 20
+            section.style.transform = 'translateY(' + shift + 'px)'
+          }
+        })
+      }
+
+      ticking = false
+    })
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true })
+  // Run once on load to set initial state
+  onScroll()
 }
 
 // ─── Page view tracking ───────────────────────────────────────────────────────
 
 function initPageTracking() {
-  // Track initial page view after a short delay (not blocking)
   setTimeout(() => trackEvent('page_view'), 500)
 }
 
@@ -387,11 +410,10 @@ function initPageTracking() {
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav()
   initContactForm()
-  initScrollAnimations()
+  initScrollReveals()
   initStarfield()
-  initParallax()
   initHeroReveal()
-  initNavScroll()
+  initScrollEffects()
   setFooterYear()
   initPageTracking()
 })
