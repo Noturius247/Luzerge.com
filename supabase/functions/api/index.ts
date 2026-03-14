@@ -211,21 +211,14 @@ Deno.serve(async (req: Request) => {
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
   )
 
-  // Route requests
-  switch (url.pathname) {
-    case '/api/contact':
-      return handleContact(req, supabase)
+  // Route requests (pathname may be /functions/v1/api/... on Supabase)
+  const path = url.pathname
+  if (path.endsWith('/contact')) return handleContact(req, supabase)
+  if (path.endsWith('/analytics')) return handleAnalytics(req, supabase)
+  if (path.endsWith('/ping')) return handlePing()
 
-    case '/api/analytics':
-      return handleAnalytics(req, supabase)
-
-    case '/api/ping':
-      return handlePing()
-
-    default:
-      return new Response(JSON.stringify({ error: 'Not Found' }), {
-        status: 404,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      })
-  }
+  return new Response(JSON.stringify({ error: 'Not Found' }), {
+    status: 404,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  })
 })
