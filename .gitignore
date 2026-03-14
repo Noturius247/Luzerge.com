@@ -6,6 +6,10 @@
 # Exception: example file is safe to commit
 !.env.example
 
+# Runtime config with secrets (generated from .env.local)
+js/config.js
+!js/config.example.js
+
 # ─── Supabase local dev ──────────────────────────────────────────────────────
 supabase/.branches
 supabase/.temp

@@ -5,8 +5,8 @@
 
 'use strict'
 
-const SUPABASE_URL = 'https://byzuraeyhrxxpztredri.supabase.co'
-const SUPABASE_ANON_KEY = 'REDACTED_ROTATE_THIS_KEY'
+// Config is loaded from js/config.js (gitignored) — see js/config.example.js
+const { SUPABASE_URL, SUPABASE_ANON_KEY } = __LUZERGE_CONFIG
 
 // Global supabase client (available to all inline scripts)
 // eslint-disable-next-line no-unused-vars
